@@ -2,6 +2,8 @@
 // Import Admin SDK
 var admin = require("firebase-admin");
 
+process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
+
 admin.initializeApp({
     credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
