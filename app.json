@@ -1,0 +1,7 @@
+{
+  "name": "Firebase SQS",
+  "description": "Script to link Google Firebase and Amazon SQS",
+  "repository": "https://github.com/buildkit-io/firebase-sqs",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "image": "heroku/nodejs"
+}
