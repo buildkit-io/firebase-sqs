@@ -8,7 +8,7 @@ admin.initializeApp({
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         privateKey: process.env.FIREBASE_PRIVATE_KEY
     }),
-    databaseURL: "https://"+process.env.FIREBASE_DATABASE_NAME+".firebaseio.com"
+    databaseURL: "https://" + process.env.FIREBASE_DATABASE_NAME + ".firebaseio.com"
 });
 
 // Get a database reference to our tasks
