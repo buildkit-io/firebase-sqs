@@ -1,10 +1,10 @@
-//console.log(process.env.TIMES);
-// Import Admin SDK
 var admin = require("firebase-admin");
 var AWS = require('aws-sdk');
 
+//set AWS region
 AWS.config.update({region: process.env.AWS_REGION});
 
+// init Firebase
 admin.initializeApp({
     credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
@@ -14,16 +14,16 @@ admin.initializeApp({
     databaseURL: "https://" + process.env.FIREBASE_DATABASE_NAME + ".firebaseio.com"
 });
 
-// Get a database reference to our tasks
+// Get a database reference to our Firebase queue
 var db = admin.database();
 var ref = db.ref(process.env.FIREBASE_DB_REF);
 
-// SQS queue
+// init SQS queue
 var sqs = new AWS.SQS({
     apiVersion: '2012-11-05'
 });
 
-// Attach an asynchronous callback to read the data at our posts reference
+// Attach an asynchronous callback to read the data from our queue
 ref.on("child_added", function(snapshot) {
     console.log(snapshot.val());
     sqs.sendMessage({
@@ -37,6 +37,7 @@ ref.on("child_added", function(snapshot) {
         }
         else {
             console.log("Success", data.MessageId);
+            ref.child(snapshot.key).remove(); // remove item from Firebase
         }
     });
 }, function(errorObject) {
