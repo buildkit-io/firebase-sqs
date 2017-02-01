@@ -3,6 +3,8 @@
 var admin = require("firebase-admin");
 var AWS = require('aws-sdk');
 
+AWS.config.update({region: process.env.AWS_REGION});
+
 admin.initializeApp({
     credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
