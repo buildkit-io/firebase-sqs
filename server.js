@@ -25,7 +25,7 @@ var sqs = new AWS.SQS({
 ref.on("value", function(snapshot) {
     console.log(snapshot.val());
     sqs.sendMessage({
-        MessageBody: snapshot.val(),
+        MessageBody: JSON.stringify(snapshot.val()),
         QueueUrl: process.env.AWS_SQS_QUEUE_URL
     }, function(err, data) {
         if (err) {
