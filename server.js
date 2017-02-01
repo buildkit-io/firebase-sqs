@@ -24,7 +24,7 @@ var sqs = new AWS.SQS({
 });
 
 // Attach an asynchronous callback to read the data at our posts reference
-ref.on("value", function(snapshot) {
+ref.on("child_added", function(snapshot) {
     console.log(snapshot.val());
     sqs.sendMessage({
         MessageGroupId: 'fifo', // currently we map 1 firebase task to 1 queue
